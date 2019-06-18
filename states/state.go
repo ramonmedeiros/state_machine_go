@@ -2,11 +2,15 @@ package states
 
 import (
     "fmt"
+    "time"
+    "github.com/ramonmedeiros/state_machine_go/users"
 )
 
 type ScooterState struct {
     Name string
-    batteryLevel int
+    User *users.User
+    BatteryLevel int
+    LastStateChange time.Time
 }
 
 func (state *ScooterState) Next() (bool, error) {
@@ -19,3 +23,4 @@ func (state *ScooterState) IsValid() (bool, error)  {
 
     return false, fmt.Errorf("")
 }
+

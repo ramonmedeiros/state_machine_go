@@ -1,4 +1,4 @@
-package states
+package states_test
 
 import (
     "fmt"
