@@ -3,11 +3,12 @@ package states_test
 import (
     "fmt"
     "testing"
+    "github.com/ramonmedeiros/state_machine_go/states"
 )
 
 
 func TestBasic(t *testing.T) {
-    state := ScooterState{}
+    state := states.ScooterState{}
     ret, err := state.Next()
 
    fmt.Println(ret)
