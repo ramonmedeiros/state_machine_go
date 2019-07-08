@@ -1,3 +1,4 @@
 language: go
 install: true
+go_import_path: github.com/ramonmedeiros/state_machine_go/
 script: go test -v ./...
