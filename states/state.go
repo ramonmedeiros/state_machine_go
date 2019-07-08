@@ -3,7 +3,7 @@ package states
 import (
     "fmt"
     "time"
-    "ramonmedeiros/state_machine_go/users"
+    "github.com/ramonmedeiros/state_machine_go/users"
 )
 
 type ScooterState struct {
