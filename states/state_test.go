@@ -3,7 +3,7 @@ package states_test
 import (
     "fmt"
     "testing"
-    "github.com/ramonmedeiros/state_machine_go/states"
+    "ramonmedeiros/state_machine_go/states"
 )
 
 
