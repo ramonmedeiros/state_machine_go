@@ -8,7 +8,7 @@ import (
 
 type ScooterState struct {
     Name string
-    User *users.User
+    User *interface{}
     BatteryLevel int
     LastStateChange time.Time
 }
