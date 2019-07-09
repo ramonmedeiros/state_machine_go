@@ -5,17 +5,13 @@ import (
     "time"
 )
 
+var Now = time.Now
+
 type ScooterReady struct {
     ScooterState
 }
 
-// this will be mocked on tests
-func Now() time.Time {
-	return time.Now()
-}
-
 func (state *ScooterReady) Next() (interface{}, error) {
-
     // last changed was more than 48h: go to Unknown
     if (state.LastStateChange.Add(time.Hour * 48).Before(Now())) {
         unknown := ScooterUnknown{}
@@ -27,9 +23,8 @@ func (state *ScooterReady) Next() (interface{}, error) {
     }
 
     // more than 21:30: set as Bounty
-    now := Now()
-    bountyTime := time.Date(now.Year(), now.Month(), now.Day(), 21, 30, 0, 0, now.Location())
-    if now.After(bountyTime) {
+    bountyTime := time.Date(Now().Year(), Now().Month(), Now().Day(), 21, 30, 0, 0, Now().Location())
+    if Now().After(bountyTime) {
         bounty := ScooterBounty{}
         bounty.Name = state.Name
         bounty.BatteryLevel = state.BatteryLevel
