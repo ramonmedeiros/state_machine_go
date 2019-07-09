@@ -11,6 +11,7 @@ type ScooterReady struct {
 }
 
 func (state *ScooterReady) Next() (interface{}, error) {
+
     // last changed was more than 48h: go to Unknown
     if (state.LastStateChange.Add(time.Hour * 48).Before(Now())) {
         unknown := ScooterUnknown{}
@@ -49,5 +50,4 @@ func (state *ScooterReady) Next() (interface{}, error) {
 func (state *ScooterReady) IsValid() (bool, error) {
     return true, nil
 }
-
 
