@@ -1,7 +1,6 @@
 package states
 
 import (
-    "fmt"
     "time"
 )
 
@@ -33,12 +32,12 @@ func (state *ScooterReady) Next() (interface{}, error) {
         return bounty, nil
     }
 
-    // next state needs user
+    // no user attached: stay ready
     if (state.User == nil) {
-        return nil, fmt.Errorf("Next state needs associate user")
+        return *state, nil
     }
 
-    //  go to rinding
+    // with a user: go to rinding
     riding := ScooterRiding{}
     riding.Name = state.Name
     riding.BatteryLevel = state.BatteryLevel
