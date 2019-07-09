@@ -5,6 +5,7 @@ import (
     "testing"
     "reflect"
     "github.com/ramonmedeiros/state_machine_go/states"
+    "github.com/ramonmedeiros/state_machine_go/users"
 )
 
 
@@ -53,5 +54,20 @@ func TestKeepReady(t *testing.T) {
 
     if (reflect.TypeOf(newstate) != reflect.TypeOf(states.ScooterReady{})) {
         t.Fatalf("Expected Ready, found %v", reflect.TypeOf(newstate))
+    }
+}
+
+func TestGoRiding(t *testing.T) {
+    user := users.User{}
+    state := states.ScooterReady{}
+    state.Name = "test-name"
+    state.User = &user
+    state.BatteryLevel = 100
+    state.LastStateChange = time.Now()
+
+    newstate, _ := state.Next()
+
+    if (reflect.TypeOf(newstate) != reflect.TypeOf(states.ScooterRiding{})) {
+        t.Fatalf("Expected Riding, found %v", reflect.TypeOf(newstate))
     }
 }

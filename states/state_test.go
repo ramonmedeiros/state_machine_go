@@ -6,7 +6,7 @@ import (
 )
 
 
-func TestBasic(t *testing.T) {
+func TestStateStruct(t *testing.T) {
     state := states.ScooterState{}
     ret, err := state.Next()
 
