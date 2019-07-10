@@ -17,8 +17,5 @@ func (state *ScooterState) Next() (bool, error) {
 }
 
 func (state *ScooterState) IsValid() (bool, error) {
-	// valid: return null error
-	return true, nil
-
-	return false, fmt.Errorf("")
+	return false, fmt.Errorf("ScooterState is just an abstraction. Need proper implementation")
 }

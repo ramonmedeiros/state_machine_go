@@ -14,3 +14,13 @@ func TestStateStruct(t *testing.T) {
 	}
 
 }
+
+func TestScooterStaterIsValid(t *testing.T) {
+	state := states.ScooterState{}
+	ret, _ := state.IsValid()
+
+    if (ret != false){
+        t.Fatalf("ScooterState must not have implementation")
+    }
+
+}
