@@ -3,12 +3,11 @@ package states
 import (
     "fmt"
     "time"
-    "github.com/ramonmedeiros/state_machine_go/users"
 )
 
 type ScooterState struct {
     Name string
-    User *interface{}
+    User interface{}
     BatteryLevel int
     LastStateChange time.Time
 }
