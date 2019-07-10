@@ -1,11 +1,10 @@
 package users
 
 type User struct {
-
 }
 
 type EndUser struct {
-    User
+	User
 }
 
 type Hunter struct {
