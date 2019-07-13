@@ -2,6 +2,7 @@ package states_test
 
 import (
 	"github.com/ramonmedeiros/state_machine_go/states"
+	"github.com/ramonmedeiros/state_machine_go/users"
 	"testing"
 )
 
@@ -15,7 +16,7 @@ func TestStateStruct(t *testing.T) {
 
 }
 
-func TestScooterStaterIsValid(t *testing.T) {
+func TestScooterStateIsValid(t *testing.T) {
 	state := states.ScooterState{}
 	ret, _ := state.IsValid()
 
@@ -24,3 +25,37 @@ func TestScooterStaterIsValid(t *testing.T) {
 	}
 
 }
+
+func TestScooterStateValidUserUser(t *testing.T) {
+    user := users.User{}
+
+	state := states.ScooterState{}
+
+    ret, _ := state.AllowedUser(user)
+    if ret == false {
+        t.Fatalf("users.User expected to be allowed")
+    }
+}
+
+func TestScooterStateValidUserHunter(t *testing.T) {
+    hunter := users.Hunter{}
+
+	state := states.ScooterState{}
+
+    ret, _ := state.AllowedUser(hunter)
+    if ret == false {
+        t.Fatalf("users.Hunter expected to be allowed")
+    }
+}
+
+func TestScooterStateValidUserAdmin(t *testing.T) {
+    admin := users.Admin{}
+
+	state := states.ScooterState{}
+
+    ret, _ := state.AllowedUser(admin)
+    if ret == false {
+        t.Fatalf("users.Admin expected to be allowed")
+    }
+}
+

@@ -1,6 +1,9 @@
 package states
 
-import "time"
+    import (
+    "time"
+    "fmt"
+)
 
 type ScooterBatteryLow struct {
 	ScooterState
@@ -17,5 +20,10 @@ func (state *ScooterBatteryLow) Next() (interface{}, error) {
 }
 
 func (state *ScooterBatteryLow) IsValid() (bool, error) {
-	return true, nil
+    // battery should be less than 20%
+    if state.BatteryLevel >= 20 {
+        return false, fmt.Errorf("BatteryLow requires 20% of level, %v found", state.BatteryLevel)
+    }
+
+    return true, nil
 }

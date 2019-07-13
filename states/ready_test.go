@@ -72,3 +72,37 @@ func TestGoRiding(t *testing.T) {
 		t.Fatalf("Expected Riding, found %v", reflect.TypeOf(newstate))
 	}
 }
+
+
+func TestScooterReadyValidUserUser(t *testing.T) {
+    user := users.User{}
+
+	state := states.ScooterReady{}
+
+    ret, _ := state.AllowedUser(user)
+    if ret == false {
+        t.Fatalf("users.User expected to be allowed")
+    }
+}
+
+func TestScooterReadyValidUserHunter(t *testing.T) {
+    hunter := users.Hunter{}
+
+	state := states.ScooterReady{}
+
+    ret, _ := state.AllowedUser(hunter)
+    if ret == false {
+        t.Fatalf("users.Hunter expected to be allowed")
+    }
+}
+
+func TestScooterReadyValidUserAdmin(t *testing.T) {
+    admin := users.Admin{}
+
+	state := states.ScooterReady{}
+
+    ret, _ := state.AllowedUser(admin)
+    if ret == false {
+        t.Fatalf("users.Admin expected to be allowed")
+    }
+}
