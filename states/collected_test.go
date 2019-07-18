@@ -10,7 +10,6 @@ import (
 
 func TestCollectedNoUser(t *testing.T) {
 	state := states.ScooterCollected{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
@@ -25,7 +24,6 @@ func TestCollectedNoUser(t *testing.T) {
 func TestCollectedNormalUser(t *testing.T) {
 	user := users.User{}
 	state := states.ScooterCollected{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
@@ -40,7 +38,6 @@ func TestCollectedNormalUser(t *testing.T) {
 func TestCollectedToDropped(t *testing.T) {
 	user := users.Hunter{}
 	state := states.ScooterCollected{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()

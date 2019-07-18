@@ -10,7 +10,6 @@ import (
 
 func TestDroppedNoUser(t *testing.T) {
 	state := states.ScooterDropped{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
@@ -25,7 +24,6 @@ func TestDroppedNoUser(t *testing.T) {
 func TestDroppedNormalUser(t *testing.T) {
 	user := users.User{}
 	state := states.ScooterDropped{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
@@ -40,7 +38,6 @@ func TestDroppedNormalUser(t *testing.T) {
 func TestDroppedToReady(t *testing.T) {
 	user := users.Hunter{}
 	state := states.ScooterDropped{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()

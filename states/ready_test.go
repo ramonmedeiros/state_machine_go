@@ -11,7 +11,6 @@ import (
 func TestReadyToUnknownState(t *testing.T) {
 	twodaysago := time.Now().Add(time.Hour * -48)
 	state := states.ScooterReady{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 100
 	state.LastStateChange = twodaysago
@@ -25,7 +24,6 @@ func TestReadyToUnknownState(t *testing.T) {
 
 func TestBountyState(t *testing.T) {
 	state := states.ScooterReady{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 100
 	state.LastStateChange = time.Now()
@@ -46,7 +44,6 @@ func TestBountyState(t *testing.T) {
 
 func TestKeepReady(t *testing.T) {
 	state := states.ScooterReady{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 100
 	state.LastStateChange = time.Now()
@@ -61,7 +58,6 @@ func TestKeepReady(t *testing.T) {
 func TestGoRiding(t *testing.T) {
 	user := users.User{}
 	state := states.ScooterReady{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 100
 	state.LastStateChange = time.Now()

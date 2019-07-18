@@ -9,7 +9,6 @@ import (
 
 func TestGoBounty(t *testing.T) {
 	state := states.ScooterBatteryLow{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()

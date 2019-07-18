@@ -11,7 +11,6 @@ import (
 func TestKeepRiding(t *testing.T) {
 	user := users.User{}
 	state := states.ScooterRiding{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 100
 	state.LastStateChange = time.Now()
@@ -25,7 +24,6 @@ func TestKeepRiding(t *testing.T) {
 
 func TestUserDeattached(t *testing.T) {
 	state := states.ScooterRiding{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 100
 	state.LastStateChange = time.Now()
@@ -40,7 +38,6 @@ func TestUserDeattached(t *testing.T) {
 func TestBatteryLow(t *testing.T) {
 	user := users.User{}
 	state := states.ScooterRiding{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
@@ -54,7 +51,6 @@ func TestBatteryLow(t *testing.T) {
 
 func TestBatteryLowNoUser(t *testing.T) {
 	state := states.ScooterRiding{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()

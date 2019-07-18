@@ -10,7 +10,6 @@ import (
 
 func TestBountyNoUser(t *testing.T) {
 	state := states.ScooterBounty{}
-	state.Name = "test-name"
 	state.User = nil
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
@@ -25,7 +24,6 @@ func TestBountyNoUser(t *testing.T) {
 func TestBountyNormalUser(t *testing.T) {
 	user := users.User{}
 	state := states.ScooterBounty{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
@@ -40,7 +38,6 @@ func TestBountyNormalUser(t *testing.T) {
 func TestBountyToCollected(t *testing.T) {
 	user := users.Hunter{}
 	state := states.ScooterBounty{}
-	state.Name = "test-name"
 	state.User = &user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()

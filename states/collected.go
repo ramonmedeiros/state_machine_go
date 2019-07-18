@@ -17,7 +17,6 @@ func (state *ScooterCollected) Next() (interface{}, error) {
 	}
 
 	dropped := ScooterDropped{}
-	dropped.Name = state.Name
 	dropped.User = state.User
 	dropped.BatteryLevel = state.BatteryLevel
 	dropped.LastStateChange = time.Now()

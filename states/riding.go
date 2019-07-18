@@ -12,7 +12,6 @@ func (state *ScooterRiding) Next() (interface{}, error) {
 	// low battery: move state
 	if state.BatteryLevel < 20 {
 		batteryLow := ScooterBatteryLow{}
-		batteryLow.Name = state.Name
 		batteryLow.User = state.User
 		batteryLow.BatteryLevel = state.BatteryLevel
 		batteryLow.LastStateChange = time.Now()
@@ -23,7 +22,6 @@ func (state *ScooterRiding) Next() (interface{}, error) {
 	// user deattached: back to ride
 	if state.User == nil {
 		ready := ScooterReady{}
-		ready.Name = state.Name
 		ready.User = state.User
 		ready.BatteryLevel = state.BatteryLevel
 		ready.LastStateChange = time.Now()

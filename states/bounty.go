@@ -17,7 +17,6 @@ func (state *ScooterBounty) Next() (interface{}, error) {
 	}
 
 	collected := ScooterCollected{}
-	collected.Name = state.Name
 	collected.User = state.User
 	collected.BatteryLevel = state.BatteryLevel
 	collected.LastStateChange = time.Now()

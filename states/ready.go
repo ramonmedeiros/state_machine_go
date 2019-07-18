@@ -15,7 +15,6 @@ func (state *ScooterReady) Next() (interface{}, error) {
 	// last changed was more than 48h: go to Unknown
 	if state.LastStateChange.Add(time.Hour * 48).Before(Now()) {
 		unknown := ScooterUnknown{}
-		unknown.Name = state.Name
 		unknown.User = nil
 		unknown.BatteryLevel = state.BatteryLevel
 		unknown.LastStateChange = Now()
@@ -26,7 +25,6 @@ func (state *ScooterReady) Next() (interface{}, error) {
 	bountyTime := time.Date(Now().Year(), Now().Month(), Now().Day(), 21, 30, 0, 0, Now().Location())
 	if Now().After(bountyTime) {
 		bounty := ScooterBounty{}
-		bounty.Name = state.Name
 		bounty.BatteryLevel = state.BatteryLevel
 		bounty.User = state.User
 		bounty.LastStateChange = Now()
@@ -40,7 +38,6 @@ func (state *ScooterReady) Next() (interface{}, error) {
 
 	// with a user: go to rinding
 	riding := ScooterRiding{}
-	riding.Name = state.Name
 	riding.BatteryLevel = state.BatteryLevel
 	riding.User = state.User
 	riding.LastStateChange = Now()
