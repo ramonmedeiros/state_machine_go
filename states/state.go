@@ -7,8 +7,6 @@ import (
     "github.com/ramonmedeiros/state_machine_go/users"
 )
 
-var AllowedUsers = []interface{}{users.User{}, users.Hunter{}, users.Admin{}}
-
 type ScooterState struct {
 	Name            string
 	User            interface{}
@@ -25,11 +23,17 @@ func (state *ScooterState) IsValid() (bool, error) {
 }
 
 func (state *ScooterState) AllowedUser(user interface{}) (bool, error) {
-	for i, _ := range AllowedUsers {
-        if reflect.TypeOf(AllowedUsers[i]) == reflect.TypeOf(user) {
+    allowedUser, _ := state.AllowedUsers()
+	for i, _ := range allowedUser {
+        if reflect.TypeOf(allowedUser[i]) == reflect.TypeOf(user) {
 			return true, nil
 		}
 	}
 	return false, fmt.Errorf("User %v not allowed", user)
 }
+
+func (state *ScooterState) AllowedUsers() ([]interface{}, error) {
+    return []interface{}{users.User{}, users.Hunter{}, users.Admin{}}, nil
+}
+
 
