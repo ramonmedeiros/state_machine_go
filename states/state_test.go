@@ -30,8 +30,9 @@ func TestScooterStateValidUserUser(t *testing.T) {
 	user := users.User{}
 
 	state := states.ScooterState{}
+    state.User = user
 
-	ret, _ := state.AllowedUser(user)
+	ret, _ := state.AllowedUser()
 	if ret == false {
 		t.Fatalf("users.User expected to be allowed")
 	}
@@ -41,8 +42,9 @@ func TestScooterStateValidUserHunter(t *testing.T) {
 	hunter := users.Hunter{}
 
 	state := states.ScooterState{}
+    state.User = hunter
 
-	ret, _ := state.AllowedUser(hunter)
+	ret, _ := state.AllowedUser()
 	if ret == false {
 		t.Fatalf("users.Hunter expected to be allowed")
 	}
@@ -52,8 +54,9 @@ func TestScooterStateValidUserAdmin(t *testing.T) {
 	admin := users.Admin{}
 
 	state := states.ScooterState{}
+    state.User = admin
 
-	ret, _ := state.AllowedUser(admin)
+	ret, _ := state.AllowedUser()
 	if ret == false {
 		t.Fatalf("users.Admin expected to be allowed")
 	}

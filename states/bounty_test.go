@@ -56,8 +56,9 @@ func TestScooterBountyValidUserUser(t *testing.T) {
 	user := users.User{}
 
 	state := states.ScooterBounty{}
+    state.User = user
 
-	ret, _ := state.AllowedUser(user)
+	ret, _ := state.AllowedUser()
 	if ret != false {
 		t.Fatalf("users.User expected to NOT be allowed")
 	}
@@ -67,8 +68,9 @@ func TestScooterBountyValidUserHunter(t *testing.T) {
 	hunter := users.Hunter{}
 
 	state := states.ScooterBounty{}
+    state.User = hunter
 
-	ret, _ := state.AllowedUser(hunter)
+	ret, _ := state.AllowedUser()
 	if ret == false {
 		t.Fatalf("users.Hunter expected to be allowed")
 	}
@@ -78,8 +80,9 @@ func TestScooterBountyValidUserAdmin(t *testing.T) {
 	admin := users.Admin{}
 
 	state := states.ScooterBounty{}
+    state.User = admin
 
-	ret, _ := state.AllowedUser(admin)
+	ret, _ := state.AllowedUser()
 	if ret != false {
 		t.Fatalf("users.Admin expected to NOT be allowed")
 	}
