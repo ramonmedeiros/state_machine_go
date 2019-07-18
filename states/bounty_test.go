@@ -53,7 +53,7 @@ func TestScooterBountyValidUserUser(t *testing.T) {
 	user := users.User{}
 
 	state := states.ScooterBounty{}
-    state.User = user
+	state.User = user
 
 	ret, _ := state.AllowedUser()
 	if ret != false {
@@ -65,7 +65,7 @@ func TestScooterBountyValidUserHunter(t *testing.T) {
 	hunter := users.Hunter{}
 
 	state := states.ScooterBounty{}
-    state.User = hunter
+	state.User = hunter
 
 	ret, _ := state.AllowedUser()
 	if ret == false {
@@ -77,7 +77,7 @@ func TestScooterBountyValidUserAdmin(t *testing.T) {
 	admin := users.Admin{}
 
 	state := states.ScooterBounty{}
-    state.User = admin
+	state.User = admin
 
 	ret, _ := state.AllowedUser()
 	if ret != false {

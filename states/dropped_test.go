@@ -60,7 +60,7 @@ func TestScooterDroppedValidUserUser(t *testing.T) {
 	user := users.User{}
 
 	state := states.ScooterDropped{}
-    state.User = user
+	state.User = user
 
 	ret, _ := state.AllowedUser()
 	if ret != false {
@@ -72,7 +72,7 @@ func TestScooterDroppedValidUserHunter(t *testing.T) {
 	hunter := users.Hunter{}
 
 	state := states.ScooterDropped{}
-    state.User = hunter
+	state.User = hunter
 
 	ret, _ := state.AllowedUser()
 	if ret == false {
@@ -84,5 +84,5 @@ func TestScooterDroppedValidUserAdmin(t *testing.T) {
 	admin := users.Admin{}
 
 	state := states.ScooterDropped{}
-    state.User = admin
+	state.User = admin
 }

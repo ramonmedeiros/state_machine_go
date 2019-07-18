@@ -53,7 +53,7 @@ func TestScooterCollectedValidUserUser(t *testing.T) {
 	user := users.User{}
 
 	state := states.ScooterCollected{}
-    state.User = user
+	state.User = user
 
 	ret, _ := state.AllowedUser()
 	if ret != false {
@@ -65,7 +65,7 @@ func TestScooterCollectedValidUserHunter(t *testing.T) {
 	hunter := users.Hunter{}
 
 	state := states.ScooterCollected{}
-    state.User = hunter
+	state.User = hunter
 
 	ret, _ := state.AllowedUser()
 	if ret == false {
@@ -77,11 +77,10 @@ func TestScooterCollectedValidUserAdmin(t *testing.T) {
 	admin := users.Admin{}
 
 	state := states.ScooterCollected{}
-    state.User = admin
+	state.User = admin
 
 	ret, _ := state.AllowedUser()
 	if ret != false {
 		t.Fatalf("users.Admin expected to NOT be allowed")
 	}
 }
-
