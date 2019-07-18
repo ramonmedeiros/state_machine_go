@@ -7,7 +7,6 @@ import (
 	"time"
 )
 
-
 type ScooterBounty struct {
 	ScooterState
 }
@@ -27,19 +26,15 @@ func (state *ScooterBounty) Next() (interface{}, error) {
 }
 
 func (state *ScooterBounty) AllowedUser(user interface{}) (bool, error) {
-    allowedUser, _ := state.AllowedUsers()
+	allowedUser, _ := state.AllowedUsers()
 	for i, _ := range allowedUser {
-        if reflect.TypeOf(allowedUser[i]) == reflect.TypeOf(user) {
+		if reflect.TypeOf(allowedUser[i]) == reflect.TypeOf(user) {
 			return true, nil
 		}
 	}
 	return false, fmt.Errorf("User %v not allowed", user)
 }
 
-
-
 func (state *ScooterBounty) AllowedUsers() ([]interface{}, error) {
-    return []interface{}{users.Hunter{}}, nil
+	return []interface{}{users.Hunter{}}, nil
 }
-
-

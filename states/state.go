@@ -2,9 +2,9 @@ package states
 
 import (
 	"fmt"
+	"github.com/ramonmedeiros/state_machine_go/users"
+	"reflect"
 	"time"
-    "reflect"
-    "github.com/ramonmedeiros/state_machine_go/users"
 )
 
 type ScooterState struct {
@@ -23,9 +23,9 @@ func (state *ScooterState) IsValid() (bool, error) {
 }
 
 func (state *ScooterState) AllowedUser(user interface{}) (bool, error) {
-    allowedUser, _ := state.AllowedUsers()
+	allowedUser, _ := state.AllowedUsers()
 	for i, _ := range allowedUser {
-        if reflect.TypeOf(allowedUser[i]) == reflect.TypeOf(user) {
+		if reflect.TypeOf(allowedUser[i]) == reflect.TypeOf(user) {
 			return true, nil
 		}
 	}
@@ -33,7 +33,5 @@ func (state *ScooterState) AllowedUser(user interface{}) (bool, error) {
 }
 
 func (state *ScooterState) AllowedUsers() ([]interface{}, error) {
-    return []interface{}{users.User{}, users.Hunter{}, users.Admin{}}, nil
+	return []interface{}{users.User{}, users.Hunter{}, users.Admin{}}, nil
 }
-
-
