@@ -58,3 +58,34 @@ func TestDroppedToReady(t *testing.T) {
 		t.Fatalf("Expected BaterryFull, got %v", readyState.BatteryLevel)
 	}
 }
+
+func TestScooterDroppedValidUserUser(t *testing.T) {
+	user := users.User{}
+
+	state := states.ScooterDropped{}
+    state.User = user
+
+	ret, _ := state.AllowedUser()
+	if ret != false {
+		t.Fatalf("users.User expected to NOT be allowed")
+	}
+}
+
+func TestScooterDroppedValidUserHunter(t *testing.T) {
+	hunter := users.Hunter{}
+
+	state := states.ScooterDropped{}
+    state.User = hunter
+
+	ret, _ := state.AllowedUser()
+	if ret == false {
+		t.Fatalf("users.Hunter expected to be allowed")
+	}
+}
+
+func TestScooterDroppedValidUserAdmin(t *testing.T) {
+	admin := users.Admin{}
+
+	state := states.ScooterDropped{}
+    state.User = admin
+}

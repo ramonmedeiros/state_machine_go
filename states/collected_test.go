@@ -52,4 +52,39 @@ func TestCollectedToDropped(t *testing.T) {
 	}
 }
 
+func TestScooterCollectedValidUserUser(t *testing.T) {
+	user := users.User{}
+
+	state := states.ScooterCollected{}
+    state.User = user
+
+	ret, _ := state.AllowedUser()
+	if ret != false {
+		t.Fatalf("users.User expected to NOT be allowed")
+	}
+}
+
+func TestScooterCollectedValidUserHunter(t *testing.T) {
+	hunter := users.Hunter{}
+
+	state := states.ScooterCollected{}
+    state.User = hunter
+
+	ret, _ := state.AllowedUser()
+	if ret == false {
+		t.Fatalf("users.Hunter expected to be allowed")
+	}
+}
+
+func TestScooterCollectedValidUserAdmin(t *testing.T) {
+	admin := users.Admin{}
+
+	state := states.ScooterCollected{}
+    state.User = admin
+
+	ret, _ := state.AllowedUser()
+	if ret != false {
+		t.Fatalf("users.Admin expected to NOT be allowed")
+	}
+}
 
