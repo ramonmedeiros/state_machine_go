@@ -19,3 +19,18 @@ func TestGoBounty(t *testing.T) {
 		t.Fatalf("Expected Bounty, found %v", reflect.TypeOf(newstate))
 	}
 }
+
+func TestValidScooterBatteryLow(t *testing.T) {
+	state := states.ScooterBatteryLow{}
+	state.User = nil
+	state.BatteryLevel = 21
+	state.LastStateChange = time.Now()
+
+	newstate, _ := state.IsValid()
+
+	if (newstate != false) {
+		t.Fatalf("Expected invalid state, not valid")
+	}
+}
+
+
