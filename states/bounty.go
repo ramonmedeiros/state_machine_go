@@ -7,10 +7,12 @@ import (
 	"time"
 )
 
+// ScooterBounty based on ScooterState
 type ScooterBounty struct {
 	ScooterState
 }
 
+// Next return the next state based on conditions
 func (state *ScooterBounty) Next() (interface{}, error) {
 	if (reflect.TypeOf(state.User) != reflect.TypeOf(&users.Hunter{})) {
 		return false, fmt.Errorf("Hunter user is expected")

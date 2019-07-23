@@ -5,10 +5,12 @@ import (
 	"time"
 )
 
+// ScooterBatteryLow based on ScooterState
 type ScooterBatteryLow struct {
 	ScooterState
 }
 
+// Next return the next state based on conditions
 func (state *ScooterBatteryLow) Next() (interface{}, error) {
 	bounty := ScooterBounty{}
 	bounty.User = nil
@@ -18,6 +20,7 @@ func (state *ScooterBatteryLow) Next() (interface{}, error) {
 
 }
 
+// IsValid validates the actual state of the struct
 func (state *ScooterBatteryLow) IsValid() (bool, error) {
 	// battery should be less than 20%
 	if state.BatteryLevel >= 20 {
