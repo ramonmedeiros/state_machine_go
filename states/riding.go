@@ -1,6 +1,7 @@
 package states
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -33,5 +34,13 @@ func (state *ScooterRiding) Next() (interface{}, error) {
 }
 
 func (state *ScooterRiding) IsValid() (bool, error) {
+	if state.BatteryLevel < 20 {
+		return false, fmt.Errorf("BatteryLevel too low, should change status")
+	}
+
+	if state.User == nil {
+		return false, fmt.Errorf("Riding state expected user")
+	}
+
 	return true, nil
 }

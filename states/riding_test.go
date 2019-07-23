@@ -61,3 +61,30 @@ func TestBatteryLowNoUser(t *testing.T) {
 		t.Fatalf("Expected BatteryLow, found %v", reflect.TypeOf(newstate))
 	}
 }
+
+func TestRidingInvalidLowBattery(t *testing.T) {
+	user := users.User{}
+	state := states.ScooterRiding{}
+	state.User = user
+	state.BatteryLevel = 19
+	state.LastStateChange = time.Now()
+
+	status, _ := state.IsValid()
+
+	if status != false {
+		t.Fatalf("Riding cannot have low battery")
+	}
+}
+
+func TestRidingInvalidUser(t *testing.T) {
+	state := states.ScooterRiding{}
+	state.User = nil
+	state.BatteryLevel = 19
+	state.LastStateChange = time.Now()
+
+	status, _ := state.IsValid()
+
+	if status != false {
+		t.Fatalf("Riding should have associated user")
+	}
+}
