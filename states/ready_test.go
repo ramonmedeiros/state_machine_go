@@ -104,3 +104,52 @@ func TestScooterReadyValidUserAdmin(t *testing.T) {
 		t.Fatalf("users.Admin expected to be allowed")
 	}
 }
+
+func TestReadyInvalidUnknown(t *testing.T) {
+	twodaysago := time.Now().Add(time.Hour * -48)
+	state := states.ScooterReady{}
+	state.User = nil
+	state.BatteryLevel = 100
+	state.LastStateChange = twodaysago
+
+	status, _ := state.IsValid()
+
+	if status != false {
+		t.Fatalf("State is invalid: must be unknown")
+	}
+}
+
+func TestReadyInvalidWithUser(t *testing.T) {
+	user := users.User{}
+	state := states.ScooterReady{}
+	state.User = user
+	state.BatteryLevel = 100
+	state.LastStateChange = time.Now()
+
+	// mock time to 21:30
+	states.Now = func() time.Time {
+		return time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day(), 21, 30, 1, 0, time.Now().Location())
+	}
+
+	status, _ := state.IsValid()
+
+	// rollback mock
+	states.Now = time.Now
+
+	if status != false {
+		t.Fatalf("Ready state cannot has user")
+	}
+}
+
+func TestReadyValid(t *testing.T) {
+	state := states.ScooterReady{}
+	state.User = nil
+	state.BatteryLevel = 100
+	state.LastStateChange = time.Now()
+
+	status, _ := state.IsValid()
+
+	if status != true {
+		t.Fatalf("Expected Ready valid")
+	}
+}

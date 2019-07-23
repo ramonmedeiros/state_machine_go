@@ -28,9 +28,7 @@ func TestValidScooterBatteryLow(t *testing.T) {
 
 	newstate, _ := state.IsValid()
 
-	if (newstate != false) {
+	if newstate != false {
 		t.Fatalf("Expected invalid state, not valid")
 	}
 }
-
-

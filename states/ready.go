@@ -1,10 +1,12 @@
 package states
 
 import (
+	"fmt"
 	"time"
 )
 
 var Now = time.Now
+var bountyTime = time.Date(Now().Year(), Now().Month(), Now().Day(), 21, 30, 0, 0, Now().Location())
 
 type ScooterReady struct {
 	ScooterState
@@ -22,7 +24,6 @@ func (state *ScooterReady) Next() (interface{}, error) {
 	}
 
 	// more than 21:30: set as Bounty
-	bountyTime := time.Date(Now().Year(), Now().Month(), Now().Day(), 21, 30, 0, 0, Now().Location())
 	if Now().After(bountyTime) {
 		bounty := ScooterBounty{}
 		bounty.BatteryLevel = state.BatteryLevel
@@ -45,5 +46,17 @@ func (state *ScooterReady) Next() (interface{}, error) {
 }
 
 func (state *ScooterReady) IsValid() (bool, error) {
+	if state.User != nil {
+		return false, fmt.Errorf("Ready state does not expect User")
+	}
+
+	if Now().After(bountyTime) {
+		return false, fmt.Errorf("After 21:30, state should be ")
+	}
+
+	if state.LastStateChange.Add(time.Hour * 48).Before(Now()) {
+		return false, fmt.Errorf("48h without change: must be Unknown")
+	}
+
 	return true, nil
 }
