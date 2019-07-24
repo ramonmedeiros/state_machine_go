@@ -2,9 +2,9 @@ package states
 
 import (
 	"fmt"
+	"github.com/ramonmedeiros/state_machine_go/users"
+	"reflect"
 	"time"
-    "reflect"
-    "github.com/ramonmedeiros/state_machine_go/users"
 )
 
 type ScooterRiding struct {
