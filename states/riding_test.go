@@ -79,7 +79,7 @@ func TestRidingInvalidLowBattery(t *testing.T) {
 func TestRidingInvalidUser(t *testing.T) {
 	state := states.ScooterRiding{}
 	state.User = nil
-	state.BatteryLevel = 19
+	state.BatteryLevel = 20
 	state.LastStateChange = time.Now()
 
 	status, _ := state.IsValid()
