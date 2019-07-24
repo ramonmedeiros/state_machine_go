@@ -51,7 +51,7 @@ func (state *ScooterReady) IsValid() (bool, error) {
 	}
 
 	if Now().After(bountyTime) {
-		return false, fmt.Errorf("After 21:30, state should be ")
+		return false, fmt.Errorf("After 21:30, state should be ScootterBounty")
 	}
 
 	if state.LastStateChange.Add(time.Hour * 48).Before(Now()) {
