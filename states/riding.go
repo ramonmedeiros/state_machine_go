@@ -3,6 +3,8 @@ package states
 import (
 	"fmt"
 	"time"
+    "reflect"
+    "github.com/ramonmedeiros/state_machine_go/users"
 )
 
 type ScooterRiding struct {
@@ -38,14 +40,24 @@ func (state *ScooterRiding) IsValid() (bool, error) {
 		return false, fmt.Errorf("BatteryLevel too low, should change status")
 	}
 
-	if state.User == nil {
-		return false, fmt.Errorf("Riding state expected user")
-	}
-
 	usersValid, usersMsg := state.AllowedUser()
 	if usersValid == false {
 		return false, fmt.Errorf("%v", usersMsg)
 	}
 
 	return true, nil
+}
+
+func (state *ScooterRiding) AllowedUser() (bool, error) {
+	allowedUser, _ := state.AllowedUsers()
+	for i, _ := range allowedUser {
+		if reflect.TypeOf(allowedUser[i]) == reflect.TypeOf(state.User) {
+			return true, nil
+		}
+	}
+	return false, fmt.Errorf("User %v not allowed", state.User)
+}
+
+func (state *ScooterRiding) AllowedUsers() ([]interface{}, error) {
+	return []interface{}{users.User{}, users.Hunter{}, users.Admin{}}, nil
 }
