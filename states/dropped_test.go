@@ -38,7 +38,7 @@ func TestDroppedNormalUser(t *testing.T) {
 func TestDroppedToReady(t *testing.T) {
 	user := users.Hunter{}
 	state := states.ScooterDropped{}
-	state.User = &user
+	state.User = user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
 
