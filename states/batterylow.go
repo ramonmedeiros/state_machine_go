@@ -2,6 +2,7 @@ package states
 
 import (
 	"fmt"
+	"reflect"
 	"time"
 )
 
@@ -33,4 +34,18 @@ func (state *ScooterBatteryLow) IsValid() (bool, error) {
 	}
 
 	return true, nil
+}
+
+func (state *ScooterBatteryLow) AllowedUser() (bool, error) {
+	allowedUser, _ := state.AllowedUsers()
+	for i, _ := range allowedUser {
+		if reflect.TypeOf(allowedUser[i]) == reflect.TypeOf(state.User) {
+			return true, nil
+		}
+	}
+	return false, fmt.Errorf("User %v not allowed", state.User)
+}
+
+func (state *ScooterBatteryLow) AllowedUsers() ([]interface{}, error) {
+	return []interface{}{nil}, nil
 }

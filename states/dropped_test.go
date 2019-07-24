@@ -86,8 +86,8 @@ func TestScooterDroppedValidUserAdmin(t *testing.T) {
 	state := states.ScooterDropped{}
 	state.User = admin
 
-    ret, msg := state.IsValid()
-    if ret != false {
-        t.Fatalf("%v", msg)
-    }
+	ret, msg := state.IsValid()
+	if ret != false {
+		t.Fatalf("%v", msg)
+	}
 }
