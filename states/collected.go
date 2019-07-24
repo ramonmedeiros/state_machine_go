@@ -46,5 +46,5 @@ func (state *ScooterCollected) AllowedUser() (bool, error) {
 }
 
 func (state *ScooterCollected) AllowedUsers() ([]interface{}, error) {
-	return []interface{}{users.Hunter{}}, nil
+	return []interface{}{users.Hunter{}, nil}, nil
 }

@@ -62,7 +62,7 @@ func TestScooterDroppedValidUserUser(t *testing.T) {
 	state := states.ScooterDropped{}
 	state.User = user
 
-	ret, _ := state.AllowedUser()
+	ret, _ := state.Next()
 	if ret != false {
 		t.Fatalf("users.User expected to NOT be allowed")
 	}
@@ -72,11 +72,11 @@ func TestScooterDroppedValidUserHunter(t *testing.T) {
 	hunter := users.Hunter{}
 
 	state := states.ScooterDropped{}
-	state.User = hunter
+	state.User = &hunter
 
-	ret, _ := state.AllowedUser()
+	ret, msg := state.Next()
 	if ret == false {
-		t.Fatalf("users.Hunter expected to be allowed")
+		t.Fatalf("%v", msg)
 	}
 }
 
@@ -85,4 +85,9 @@ func TestScooterDroppedValidUserAdmin(t *testing.T) {
 
 	state := states.ScooterDropped{}
 	state.User = admin
+
+    ret, msg := state.Next()
+    if ret != false {
+        t.Fatalf("%v", msg)
+    }
 }
