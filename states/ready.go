@@ -58,5 +58,10 @@ func (state *ScooterReady) IsValid() (bool, error) {
 		return false, fmt.Errorf("48h without change: must be Unknown")
 	}
 
+	usersValid, usersMsg := state.AllowedUser()
+	if usersValid == false {
+		return false, fmt.Errorf("%v", usersMsg)
+	}
+
 	return true, nil
 }

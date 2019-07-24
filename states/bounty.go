@@ -14,8 +14,8 @@ type ScooterBounty struct {
 
 // Next return the next state based on conditions
 func (state *ScooterBounty) Next() (interface{}, error) {
-	if (reflect.TypeOf(state.User) != reflect.TypeOf(&users.Hunter{})) {
-		return false, fmt.Errorf("Hunter user is expected")
+	if reflect.TypeOf(state.User) != reflect.TypeOf(users.Hunter{}) {
+		return false, fmt.Errorf("Expected Hunter user to change state")
 	}
 
 	collected := ScooterCollected{}
@@ -24,6 +24,17 @@ func (state *ScooterBounty) Next() (interface{}, error) {
 	collected.LastStateChange = time.Now()
 
 	return collected, nil
+}
+
+// IsValid validates the actual state of the struct
+func (state *ScooterBounty) IsValid() (bool, error) {
+
+	usersValid, usersMsg := state.AllowedUser()
+	if usersValid == false {
+		return false, fmt.Errorf("%v", usersMsg)
+	}
+
+	return true, nil
 }
 
 func (state *ScooterBounty) AllowedUser() (bool, error) {
@@ -37,5 +48,5 @@ func (state *ScooterBounty) AllowedUser() (bool, error) {
 }
 
 func (state *ScooterBounty) AllowedUsers() ([]interface{}, error) {
-	return []interface{}{users.Hunter{}}, nil
+	return []interface{}{users.Hunter{}, nil}, nil
 }

@@ -42,5 +42,10 @@ func (state *ScooterRiding) IsValid() (bool, error) {
 		return false, fmt.Errorf("Riding state expected user")
 	}
 
+	usersValid, usersMsg := state.AllowedUser()
+	if usersValid == false {
+		return false, fmt.Errorf("%v", usersMsg)
+	}
+
 	return true, nil
 }

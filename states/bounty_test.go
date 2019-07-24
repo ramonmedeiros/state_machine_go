@@ -14,21 +14,21 @@ func TestBountyNoUser(t *testing.T) {
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
 
-	newstate, _ := state.Next()
+	newstate, _ := state.IsValid()
 
-	if newstate != false {
-		t.Fatalf("Expected failure, got %v", newstate)
+	if newstate != true {
+		t.Fatalf("Expected valid state")
 	}
 }
 
 func TestBountyNormalUser(t *testing.T) {
 	user := users.User{}
 	state := states.ScooterBounty{}
-	state.User = &user
+	state.User = user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
 
-	newstate, _ := state.Next()
+	newstate, _ := state.IsValid()
 
 	if newstate != false {
 		t.Fatalf("Expected failure, got %v", newstate)
@@ -38,14 +38,12 @@ func TestBountyNormalUser(t *testing.T) {
 func TestBountyToCollected(t *testing.T) {
 	user := users.Hunter{}
 	state := states.ScooterBounty{}
-	state.User = &user
-	state.BatteryLevel = 19
-	state.LastStateChange = time.Now()
+	state.User = user
 
-	newstate, _ := state.Next()
+	newstate, msg := state.Next()
 
 	if (reflect.TypeOf(newstate) != reflect.TypeOf(states.ScooterCollected{})) {
-		t.Fatalf("Expected Collected, got %v", newstate)
+		t.Fatalf("%v", msg)
 	}
 }
 
@@ -82,5 +80,18 @@ func TestScooterBountyValidUserAdmin(t *testing.T) {
 	ret, _ := state.AllowedUser()
 	if ret != false {
 		t.Fatalf("users.Admin expected to NOT be allowed")
+	}
+}
+
+func TestScooterBountyIsValid(t *testing.T) {
+	user := users.User{}
+
+	state := states.ScooterBounty{}
+	state.User = user
+
+	ret, _ := state.IsValid()
+
+	if ret != false {
+		t.Fatalf("Expected invalid bounty due commom user")
 	}
 }

@@ -18,6 +18,12 @@ func (state *ScooterState) Next() (bool, error) {
 }
 
 func (state *ScooterState) IsValid() (bool, error) {
+
+	usersValid, usersMsg := state.AllowedUser()
+	if usersValid == false {
+		return false, fmt.Errorf("%v", usersMsg)
+	}
+
 	return false, fmt.Errorf("ScooterState is just an abstraction. Need proper implementation")
 }
 
@@ -32,5 +38,5 @@ func (state *ScooterState) AllowedUser() (bool, error) {
 }
 
 func (state *ScooterState) AllowedUsers() ([]interface{}, error) {
-	return []interface{}{users.User{}, users.Hunter{}, users.Admin{}}, nil
+	return []interface{}{users.User{}, users.Hunter{}, users.Admin{}, nil}, nil
 }

@@ -24,6 +24,17 @@ func (state *ScooterCollected) Next() (interface{}, error) {
 	return dropped, nil
 }
 
+// IsValid validates the actual state of the struct
+func (state *ScooterCollected) IsValid() (bool, error) {
+
+	usersValid, usersMsg := state.AllowedUser()
+	if usersValid == false {
+		return false, fmt.Errorf("%v", usersMsg)
+	}
+
+	return true, nil
+}
+
 func (state *ScooterCollected) AllowedUser() (bool, error) {
 	allowedUser, _ := state.AllowedUsers()
 	for i, _ := range allowedUser {

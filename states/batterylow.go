@@ -27,5 +27,10 @@ func (state *ScooterBatteryLow) IsValid() (bool, error) {
 		return false, fmt.Errorf("BatteryLow requires 20%% of level, %v found", state.BatteryLevel)
 	}
 
+	usersValid, usersMsg := state.AllowedUser()
+	if usersValid == false {
+		return false, fmt.Errorf("%v", usersMsg)
+	}
+
 	return true, nil
 }

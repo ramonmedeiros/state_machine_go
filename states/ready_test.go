@@ -147,9 +147,9 @@ func TestReadyValid(t *testing.T) {
 	state.BatteryLevel = 100
 	state.LastStateChange = time.Now()
 
-	status, _ := state.IsValid()
+	status, msg := state.IsValid()
 
 	if status != true {
-		t.Fatalf("Expected Ready valid")
+		t.Fatalf("%v", msg)
 	}
 }
