@@ -126,53 +126,18 @@ func TestBatteryLowToCollected(t *testing.T) {
     }
 
     // next state of BatteryLow
-    ret, err = batLow.Next()
+    ret, err := batLow.Next()
     if ret == false {
         t.Fatalf("%v", err)
     }
     bounty := ret.(states.ScooterBounty)
-    t.Log("State is", reflect.TypeOf(bounty).String())
 
-    // set Hunter user and validate Bounty
+    // set Hunter user
     bounty.User = users.Hunter{}
     status, err = bounty.IsValid()
     if status == false {
         t.Fatalf("%v", err)
     }
 
-    // next state of bounty
-    ret, err = bounty.Next()
-    if ret == false {
-        t.Fatalf("%v", err)
-    }
-    collected := ret.(states.ScooterCollected)
-    t.Log("State is", reflect.TypeOf(collected).String())
 
-    // validate Collected
-    status, err = collected.IsValid()
-    if status == false {
-        t.Fatalf("%v", err)
-    }
-
-    // next state of Collected
-    ret, err = collected.Next()
-    if ret == false {
-        t.Fatalf("%v", err)
-    }
-    dropped := ret.(states.ScooterDropped)
-    t.Log("State is", reflect.TypeOf(dropped).String())
-
-    // validate dropped
-    status, err = dropped.IsValid()
-    if status == false {
-        t.Fatalf("%v", err)
-    }
-
-    // next state of dropped
-    ret, err = dropped.Next()
-    if ret == false {
-        t.Fatalf("%v", err)
-    }
-    ready := ret.(states.ScooterReady)
-    t.Log("State is", reflect.TypeOf(ready).String())
 }
