@@ -12,7 +12,7 @@ type ScooterCollected struct {
 }
 
 func (state *ScooterCollected) Next() (interface{}, error) {
-	if (reflect.TypeOf(state.User) != reflect.TypeOf(&users.Hunter{})) {
+	if (reflect.TypeOf(state.User) != reflect.TypeOf(users.Hunter{})) {
 		return false, fmt.Errorf("Hunter user is expected")
 	}
 

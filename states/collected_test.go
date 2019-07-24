@@ -38,7 +38,7 @@ func TestCollectedNormalUser(t *testing.T) {
 func TestCollectedToDropped(t *testing.T) {
 	user := users.Hunter{}
 	state := states.ScooterCollected{}
-	state.User = &user
+	state.User = user
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
 
@@ -55,7 +55,7 @@ func TestScooterCollectedValidUserUser(t *testing.T) {
 	state := states.ScooterCollected{}
 	state.User = user
 
-	ret, _ := state.Next()
+	ret, _ := state.IsValid()
 	if ret != false {
 		t.Fatalf("users.User expected to NOT be allowed")
 	}
@@ -65,9 +65,9 @@ func TestScooterCollectedValidUserHunter(t *testing.T) {
 	hunter := users.Hunter{}
 
 	state := states.ScooterCollected{}
-	state.User = &hunter
+	state.User = hunter
 
-	ret, msg := state.Next()
+	ret, msg := state.IsValid()
 	if ret == false {
 		t.Fatalf("%v", msg)
 	}
@@ -79,7 +79,7 @@ func TestScooterCollectedValidUserAdmin(t *testing.T) {
 	state := states.ScooterCollected{}
 	state.User = admin
 
-	ret, _ := state.Next()
+	ret, _ := state.IsValid()
 	if ret != false {
 		t.Fatalf("users.Admin expected to NOT be allowed")
 	}
