@@ -32,7 +32,7 @@ func (state *ScooterRiding) Next() (interface{}, error) {
 	}
 
 	// no change, keep
-	return *state, nil
+	return state, nil
 }
 
 func (state *ScooterRiding) IsValid() (bool, error) {

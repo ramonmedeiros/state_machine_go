@@ -16,8 +16,8 @@ func TestCollectedNoUser(t *testing.T) {
 
 	newstate, _ := state.Next()
 
-	if newstate != false {
-		t.Fatalf("Expected failure, got %v", newstate)
+	if newstate == false {
+		t.Fatalf("Expected Collected, got %v", newstate)
 	}
 }
 
@@ -28,7 +28,7 @@ func TestCollectedNormalUser(t *testing.T) {
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
 
-	newstate, _ := state.Next()
+	newstate, _ := state.IsValid()
 
 	if newstate != false {
 		t.Fatalf("Expected failure, got %v", newstate)

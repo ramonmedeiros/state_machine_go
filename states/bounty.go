@@ -14,16 +14,15 @@ type ScooterBounty struct {
 
 // Next return the next state based on conditions
 func (state *ScooterBounty) Next() (interface{}, error) {
-	if reflect.TypeOf(state.User) != reflect.TypeOf(users.Hunter{}) {
-		return false, fmt.Errorf("Expected Hunter user to change state")
+	if reflect.TypeOf(state.User) == reflect.TypeOf(users.Hunter{}) {
+		collected := ScooterCollected{}
+		collected.User = state.User
+		collected.BatteryLevel = state.BatteryLevel
+		collected.LastStateChange = time.Now()
+		return collected, nil
 	}
 
-	collected := ScooterCollected{}
-	collected.User = state.User
-	collected.BatteryLevel = state.BatteryLevel
-	collected.LastStateChange = time.Now()
-
-	return collected, nil
+	return state, nil
 }
 
 // IsValid validates the actual state of the struct

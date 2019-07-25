@@ -14,10 +14,10 @@ func TestDroppedNoUser(t *testing.T) {
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
 
-	newstate, _ := state.Next()
+	newstate, _ := state.IsValid()
 
-	if newstate != false {
-		t.Fatalf("Expected failure, got %v", newstate)
+	if newstate == false {
+		t.Fatalf("Expected valid state, got %v", newstate)
 	}
 }
 
@@ -28,10 +28,10 @@ func TestDroppedNormalUser(t *testing.T) {
 	state.BatteryLevel = 19
 	state.LastStateChange = time.Now()
 
-	newstate, _ := state.Next()
+	newstate, _ := state.IsValid()
 
 	if newstate != false {
-		t.Fatalf("Expected failure, got %v", newstate)
+		t.Fatalf("Expected invalid, got %v", newstate)
 	}
 }
 

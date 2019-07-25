@@ -64,7 +64,7 @@ func TestKeepReady(t *testing.T) {
 	newstate, _ := state.Next()
 	unmockTime()
 
-	if (reflect.TypeOf(newstate) != reflect.TypeOf(states.ScooterReady{})) {
+	if (reflect.TypeOf(newstate) != reflect.TypeOf(&states.ScooterReady{})) {
 		t.Fatalf("Expected Ready, found %v", reflect.TypeOf(newstate))
 	}
 }

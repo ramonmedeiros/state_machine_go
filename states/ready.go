@@ -32,17 +32,16 @@ func (state *ScooterReady) Next() (interface{}, error) {
 		return bounty, nil
 	}
 
-	// no user attached: stay ready
-	if state.User == nil {
-		return *state, nil
+	// with a user: go to rinding
+	if state.User != nil {
+		riding := ScooterRiding{}
+		riding.BatteryLevel = state.BatteryLevel
+		riding.User = state.User
+		riding.LastStateChange = Now()
+		return riding, nil
 	}
 
-	// with a user: go to rinding
-	riding := ScooterRiding{}
-	riding.BatteryLevel = state.BatteryLevel
-	riding.User = state.User
-	riding.LastStateChange = Now()
-	return riding, nil
+	return state, nil
 }
 
 func (state *ScooterReady) IsValid() (bool, error) {

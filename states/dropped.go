@@ -12,16 +12,14 @@ type ScooterDropped struct {
 }
 
 func (state *ScooterDropped) Next() (interface{}, error) {
-	if (reflect.TypeOf(state.User) != reflect.TypeOf(users.Hunter{})) {
-		return false, fmt.Errorf("Hunter user is expected")
+	if (reflect.TypeOf(state.User) == reflect.TypeOf(users.Hunter{})) {
+		dropped := ScooterReady{}
+		dropped.User = nil
+		dropped.BatteryLevel = 100
+		dropped.LastStateChange = time.Now()
+		return dropped, nil
 	}
-
-	dropped := ScooterReady{}
-	dropped.User = nil
-	dropped.BatteryLevel = 100
-	dropped.LastStateChange = time.Now()
-
-	return dropped, nil
+	return state, nil
 }
 
 // IsValid validates the actual state of the struct

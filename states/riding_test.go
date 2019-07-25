@@ -17,7 +17,7 @@ func TestKeepRiding(t *testing.T) {
 
 	newstate, _ := state.Next()
 
-	if (reflect.TypeOf(newstate) != reflect.TypeOf(states.ScooterRiding{})) {
+	if (reflect.TypeOf(newstate) != reflect.TypeOf(&states.ScooterRiding{})) {
 		t.Fatalf("Expected Riding, found %v", reflect.TypeOf(newstate))
 	}
 }
